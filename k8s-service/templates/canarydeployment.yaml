@@ -1,0 +1,9 @@
+{{- /*
+The Canary Deployment Controller for the application being deployed. This resource manages the creation and replacement
+of only the canary Pod(s) backing your application. It is intended to be used to test new release candidates
+and ensure they are free of issues prior to performing a full roll out.
+*/ -}}
+
+{{- if .Values.canary.enabled -}}
+{{ include "k8s-service.deploymentSpec" (dict "Values" .Values "isCanary" true "Release" .Release "Chart" .Chart) }}
+{{- end }}
